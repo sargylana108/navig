@@ -1,0 +1,16 @@
+
+<launch>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(find practice1)/description/robot_urdf.xacro"/>
+
+    <rosparam file="$(find practice1)/config/params.yaml" command="load"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen"/>
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" output="screen"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen"
+            args="-d $(find practice1)/rviz/config.rviz" />
+
+    <node pkg="practice1" type="practice1_odom_node" name="practice1_odom_node" output="screen"/>
+    <node pkg="practice1" type="practice1_path_node" name="practice1_path_node" output="screen"/>
+</launch>
